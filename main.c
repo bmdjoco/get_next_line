@@ -4,18 +4,10 @@
 
 int main(void)
 {
-	int		fd;
-	char	*res;
-
-	fd = open("res.txt", O_RDONLY);
-	// fd = 0;
-	if (fd == -1)
-		return 1;
-	while ((res = get_next_line(fd)) != NULL)
-	{
-		printf("%s", res);
-		free(res);
-	}
-	close(fd);
+	int fd = open("res.txt", O_RDONLY);
+	
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 	return 0;
 }

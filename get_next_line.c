@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:43:36 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/05/19 14:09:05 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/05/21 14:15:23 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_strdup(char *src)
 	char	*res;
 
 	l = 0;
+	if (!src)
+		return (NULL);
 	while (src[l])
 		l++;
 	res = (char *) malloc((l + 1) * sizeof(char));
@@ -57,6 +59,8 @@ static char	*read_to_stash(int fd, char *stash)
 			break ;
 		buff[is_end] = '\0';
 		tmp = ft_strjoin(stash, buff);
+		if (!tmp)
+			return (free(buff), NULL);
 		free(stash);
 		stash = tmp;
 	}
@@ -83,8 +87,9 @@ char	*get_next_line(int fd)
 		i++;
 	res = ft_substr(stash, 0, i);
 	n_stash = ft_strdup(stash + i);
+	if (!res || !n_stash)
+		return (free(res), free(n_stash), NULL);
 	free(stash);
 	stash = n_stash;
 	return (res);
 }
-
